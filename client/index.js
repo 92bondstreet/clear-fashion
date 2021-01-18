@@ -34,8 +34,9 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // I can find on these e-shops
 // 2. Log the variable
 
-var cheapest_tshirt = MY_FAVORITE_BRANDS[1]["url"];
+/*var cheapest_tshirt ="https://www.loom.fr/products/le-t-shirt";
 console.log(cheapest_tshirt);
+*/
 
 
 
@@ -88,18 +89,40 @@ console.log(sorted_price);
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
-var sorted_date = marketplace.sort((product1,product2)=>{return product1.date-product2.date });
+
+/*var sorted_date = marketplace.sort(function(product1,product2){
+  var a = new Date(product1.date);
+  var b = new Date(product2.date);
+  if(a<b) return 1;
+  if (a>b) return -1;
+  return 0
+
+});
 console.log(sorted_date);
+*/
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
-
+console.log("FILTER");
+var filtered_price = marketplace.filter(function(item){
+  
+    return item.price>=50 && item.price<=100;
+});
+console.log(filtered_price)
 
 // 🎯 TODO: Average Basket
 // 1. Determine the average basket of the marketplace
 // 2. Log the average
 
+var average_basket = 0
+for(let i =0; i < marketplace.length;i++)
+{
+  average_basket= average_basket+ marketplace[i].price;
+
+}
+average_basket = average_basket/(marketplace.length)
+console.log(average_basket)
 
 
 
