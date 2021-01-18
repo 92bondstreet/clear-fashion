@@ -39,27 +39,38 @@ console.log("Number of products : " + number_product)
 // 3. Log how many brands we have
 
 var brands_name = [];
-marketplace.forEach(element => brands_name.push(element.brand))
-console.log("Brands names : " + brands_name)
-console.log("Number of brands : " + brands_name.length)
+marketplace.forEach(product => brands_name.push(product.brand))
+
+// 2e approche
+var brand2 = marketplace.map(product => product.brand);
+
+let unique = [...new Set(brands_name)]
+
+console.log("Brands names : " + unique )
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
 
-function sortByPrice()
-{
-  marketplace.sort((productA, productB) => {return(productA.price - productB.price)})
-}
+var sorted_price = marketplace.sort(function(a, b) {
+  return parseFloat(a.price) - parseFloat(b.price);
+});
 
-console.log(sortByPrice())
+sorted_price.forEach(element => console.log(element.price))
+
+//console.log("Sort by price : " + sorted_price)
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
+var sorted_date = marketplace.sort(function(a, b) {
+  return parseFloat(a.date) - parseFloat(b.date);
+});
+
+sorted_date.forEach(element => console.log(element.date))
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
