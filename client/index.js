@@ -55,19 +55,21 @@ console.log(cheapest_tshirt);
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
-var number_product = marketplace.length
+/*var number_product = marketplace.length
 console.log(number_product)
+*/
 
 // 🎯 TODO: Brands name
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
-var names = []
+/*var names = []
 marketplace.forEach(element => { names.push(element["brand"])
   
 });
-console.log(names)
-console.log(names.length)
+console.log(names);
+console.log(names.length);
+*/
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -75,11 +77,19 @@ console.log(names.length)
 // 3. Log the variable
 
 
+
+/*var sorted_price = marketplace.sort((product1,product2)=>{return product1.price-product2.price });
+console.log(sorted_price);
+
+*/
+
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
+var sorted_date = marketplace.sort((product1,product2)=>{return product1.date-product2.date });
+console.log(sorted_date);
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
