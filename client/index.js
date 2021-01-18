@@ -34,7 +34,7 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // I can find on these e-shops
 // 2. Log the variable
 
-/*var cheapest_tshirt ="https://www.loom.fr/products/le-t-shirt";
+/*const cheapest_tshirt ="https://www.loom.fr/products/le-t-shirt";
 console.log(cheapest_tshirt);
 */
 
@@ -64,13 +64,13 @@ console.log(number_product)
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
-/*var names = []
-marketplace.forEach(element => { names.push(element["brand"])
+const brand_names = new Set()
+marketplace.forEach(element => { brand_names.add(element["brand"])
   
 });
-console.log(names);
-console.log(names.length);
-*/
+console.log(brand_names);
+console.log(brand_names.length);
+
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -104,17 +104,18 @@ console.log(sorted_date);
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
-console.log("FILTER");
+/*console.log("FILTER");
 var filtered_price = marketplace.filter(function(item){
   
     return item.price>=50 && item.price<=100;
 });
 console.log(filtered_price)
+*/
 
 // 🎯 TODO: Average Basket
 // 1. Determine the average basket of the marketplace
 // 2. Log the average
-
+/*
 var average_basket = 0
 for(let i =0; i < marketplace.length;i++)
 {
@@ -123,7 +124,7 @@ for(let i =0; i < marketplace.length;i++)
 }
 average_basket = average_basket/(marketplace.length)
 console.log(average_basket)
-
+*/
 
 
 
@@ -150,10 +151,35 @@ console.log(average_basket)
 // 2. Log the variable
 // 3. Log the number of products by brands
 
+const brands = {
+}
+brand_names.forEach(item=>brands[item]=[]);
+marketplace.forEach(item=> brands[item.brand].push(item));
+console.log(brands)
+
 
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
+
+function sort(item1,item2,key)
+{
+  if (item1.key<item2.key){
+    return 1
+  }
+  if (item1.key>item2.key){
+    return -1
+  }
+  return 0
+
+};
+
+for(let value in Object.values(brands))
+{
+  
+
+};
+
 
 
 // 🎯 TODO: Sort by date for each brand
