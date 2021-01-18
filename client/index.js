@@ -26,14 +26,12 @@ console.log(MY_FAVORITE_BRANDS[0]);
 var cheapest_tshirt ="https://www.loom.fr/products/le-t-shirt";
 console.log(cheapest_tshirt);
 
-
 // 🎯 TODO: Number of products
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
 var number_product = marketplace.length
 console.log("Number of products : " + number_product)
-
 
 // 🎯 TODO: Brands name
 // 1. Create a variable and assign it the list of brands name only
@@ -50,6 +48,12 @@ console.log("Number of brands : " + brands_name.length)
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
 
+function sortByPrice()
+{
+  marketplace.sort((productA, productB) => {return(productA.price - productB.price)})
+}
+
+console.log(sortByPrice())
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
