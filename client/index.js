@@ -174,19 +174,24 @@ function sort(item1,item2,key)
 
 };
 
-for(let value in Object.values(brands))
-{
-  
+Object.keys(brands).forEach(item=>brands[item].sort((a,b)=>b.price-a.price));
 
-};
-
+console.log(brands);
 
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
+Object.keys(brands).forEach(item=>brands[item].sort(function (a,b){
+var adate = new Date(a.date);
+  var bdate = new Date(b.date);
+  if(adate<bdate) return -1;
+  if (adate>bdate) return 1;
+  return 0
+}));
 
+console.log(brands);
 
 
 
