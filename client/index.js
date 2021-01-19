@@ -1,6 +1,7 @@
 // Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
 
+
 console.log('🚀 This is it.');
 
 const MY_FAVORITE_BRANDS = [{
@@ -64,13 +65,14 @@ console.log(number_product)
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
+/*
 const brand_names = new Set()
 marketplace.forEach(element => { brand_names.add(element["brand"])
   
 });
 console.log(brand_names);
 console.log(brand_names.length);
-
+*/
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -78,11 +80,11 @@ console.log(brand_names.length);
 // 3. Log the variable
 
 
-
-/*var sorted_price = marketplace.sort((product1,product2)=>{return product1.price-product2.price });
+/*
+var sorted_price = marketplace.sort((product1,product2)=>{return product1.price-product2.price });
 console.log(sorted_price);
-
 */
+
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
@@ -151,17 +153,18 @@ console.log(average_basket)
 // 2. Log the variable
 // 3. Log the number of products by brands
 
-const brands = {
+/*const brands = {
 }
 brand_names.forEach(item=>brands[item]=[]);
 marketplace.forEach(item=> brands[item.brand].push(item));
 console.log(brands)
 
-
+*/
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
 
+/*
 function sort(item1,item2,key)
 {
   if (item1.key<item2.key){
@@ -177,12 +180,13 @@ function sort(item1,item2,key)
 Object.keys(brands).forEach(item=>brands[item].sort((a,b)=>b.price-a.price));
 
 console.log(brands);
+*/
 
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
-
+/*
 Object.keys(brands).forEach(item=>brands[item].sort(function (a,b){
 var adate = new Date(a.date);
   var bdate = new Date(b.date);
@@ -194,6 +198,7 @@ var adate = new Date(a.date);
 console.log(brands);
 
 
+*/
 
 /**
  * 💶
@@ -206,9 +211,11 @@ console.log(brands);
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
 
+/*
+const ind = 0.9*Math.round(marketplace.length);
+console.log(ind,sorted_price[ind])
 
-
-
+*/
 
 /**
  * 🧥
@@ -219,7 +226,7 @@ console.log(brands);
  * 🧥
  */
 
-const COTELE_PARIS = [
+var COTELE_PARIS = [
   {
     link: 'https://coteleparis.com//collections/tous-les-produits-cotele/products/la-baseball-cap-gris',
     price: 45,
@@ -281,21 +288,50 @@ const COTELE_PARIS = [
 // 🎯 TODO: New released products
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
+/*var new_release = COTELE_PARIS.filter(function(item)
+{
+  let temp =  moment (item.date);
+  let today = moment (new Date().toISOString().slice(0, 10))
+  return Math.abs(today.week()-temp.week())< 2
+})
+console.log(new_release)
+*/
 
 
 // 🎯 TODO: Reasonable price
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
+/*
+var reasonable = COTELE_PARIS.filter(function(item)
+{
+  return item.price<100
+})
+console.log(reasonable.length==COTELE_PARIS.length);
+*/
 
 
 // 🎯 TODO: Find a specific product
 // 1. Find the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the product
 
+/*var uid = COTELE_PARIS.filter(function(item)
+{
+  return item.uuid=='b56c6d88-749a-5b4c-b571-e5b5c6483131';
+});
+console.log(uid);
+*/
+
 
 // 🎯 TODO: Delete a specific product
 // 1. Delete the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the new list of product
+
+/*COTELE_PARIS = COTELE_PARIS.filter(function(item)
+{
+  return item.uuid!='b56c6d88-749a-5b4c-b571-e5b5c6483131';
+});
+console.log(COTELE_PARIS);
+*/
 
 // 🎯 TODO: Save the favorite product
 let blueJacket = {
@@ -312,6 +348,12 @@ jacket.favorite = true;
 // 1. Log `blueJacket` and `jacket` variables
 // 2. What do you notice?
 
+/*
+console.log(blueJacket);
+console.log(jacket);
+//Same 
+*/
+
 blueJacket = {
   'link': 'https://coteleparis.com/collections/tous-les-produits-cotele/products/la-veste-bleu-roi',
   'price': 110,
@@ -320,7 +362,10 @@ blueJacket = {
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 
-
+/*jacket.favorite=true;
+console.log(jacket.favorite,blueJacket)
+//blue jacket has no attribute favorite -> will not be changed
+*/
 
 
 
@@ -333,3 +378,5 @@ blueJacket = {
 // 🎯 TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
+localStorage.favorite = MY_FAVORITE_BRANDS;
+console.log(localStorage);
