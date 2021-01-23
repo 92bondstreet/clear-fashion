@@ -113,21 +113,29 @@ console.log(" Average basket : " + average_basket)
 // The key is the brand name
 // The value is the array of products
 //
-// Example:
-// const brands = {
-//   'brand-name-1': [{...}, {...}, ..., {...}],
-//   'brand-name-2': [{...}, {...}, ..., {...}],
-//   ....
-//   'brand-name-n': [{...}, {...}, ..., {...}],
-// };
-//
-// 2. Log the variable
-// 3. Log the number of products by brands
+
+var brands ={};
+//unique.forEach(brand_name=>{marketplace.forEach(product=>{
+//  if(product.brand==brand_name) {brands[brand_name].push(product)}})})
+console.log(brands)
+
 
 
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
+
+function sort(item1,item2,key)
+{
+  if (item1.key<item2.key){
+    return 1
+  }
+  if (item1.key>item2.key){
+    return -1
+  }
+  return 0
+
+};
 
 
 // 🎯 TODO: Sort by date for each brand
@@ -149,7 +157,8 @@ console.log(" Average basket : " + average_basket)
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
 
-
+const ind = 0.9*Math.round(marketplace.length);
+console.log(ind,sorted_price[ind])
 
 
 
@@ -225,6 +234,13 @@ const COTELE_PARIS = [
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
 
+var new_release = COTELE_PARIS.filter(function(item)
+{
+  let temp =  moment (item.date);
+  let today = moment (new Date().toISOString().slice(0, 10))
+  return Math.abs(today.week()-temp.week())< 2
+})
+console.log(new_release)
 
 // 🎯 TODO: Reasonable price
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
