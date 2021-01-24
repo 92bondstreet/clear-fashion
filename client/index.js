@@ -114,35 +114,54 @@ console.log(" Average basket : " + average_basket)
 // The value is the array of products
 //
 
-var brands ={};
-//unique.forEach(brand_name=>{marketplace.forEach(product=>{
-//  if(product.brand==brand_name) {brands[brand_name].push(product)}})})
+var brands = {};
+
+unique.forEach(brand_name => brands[brand_name] = []);
+
+unique.forEach(brand_name => {
+  marketplace.forEach(product => {
+    if (product.brand == brand_name) {
+      brands[brand_name].push(product);
+    }
+  });
+});
+
+
+// 2e version simplifiée : 
+
+var brands = {};
+
+unique.forEach(brand_name => {
+  brands[brand_name] = marketplace.filter(product => product.brand === brand_name);
+});
 console.log(brands)
-
-
-
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
 
-function sort(item1,item2,key)
-{
-  if (item1.key<item2.key){
-    return 1
-  }
-  if (item1.key>item2.key){
-    return -1
-  }
-  return 0
+// Create items array
+var items = Object.keys(brands).map(function(key) {
+  return [key, brands[key]];
+})
 
-};
+// Sort the array based on the second element
+items.sort(function(first, second) {
+  return second.price - first.price;
+});
 
+console.log("sort by price : " , items)
+
+//console.log(brands)
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
+items.sort(function(first, second) {
+  return new Date(second.date) - new Date(first.date);
+});
 
+console.log("sort by date : " , items)
 
 
 
@@ -234,27 +253,53 @@ const COTELE_PARIS = [
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
 
-var new_release = COTELE_PARIS.filter(function(item)
+/*var new_release = COTELE_PARIS.filter(function(item)
 {
-  let temp =  moment (item.date);
-  let today = moment (new Date().toISOString().slice(0, 10))
+  let temp =  new Date(item.date);
+  let today = new Date().toISOString().slice(0, 10)  
   return Math.abs(today.week()-temp.week())< 2
 })
 console.log(new_release)
+*/
 
 // 🎯 TODO: Reasonable price
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
-
+var reasonable = true
+COTELE_PARIS.forEach(product =>{if(product.price>100) {reasonable= false}})
+if(reasonable == false)
+{
+  console.log("It's not a reasonable price shop")
+}
+else
+{
+  console.log("It's a reasonable price shop");
+}
 
 // 🎯 TODO: Find a specific product
 // 1. Find the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the product
+var findProduct = null
+COTELE_PARIS.forEach(product => {if(product.uuid == 'b56c6d88-749a-5b4c-b571-e5b5c6483131') {findProduct = product}})
+console.log(findProduct)
 
+//2e approche 
+
+var uid = COTELE_PARIS.filter(function(item)
+{
+  return item.uuid=='b56c6d88-749a-5b4c-b571-e5b5c6483131';
+});
+console.log(uid);
 
 // 🎯 TODO: Delete a specific product
 // 1. Delete the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the new list of product
+
+var COTELE_PARIS2 = COTELE_PARIS.filter(function(item)
+{
+  return item.uuid!='b56c6d88-749a-5b4c-b571-e5b5c6483131';
+});
+console.log(COTELE_PARIS2)
 
 // 🎯 TODO: Save the favorite product
 let blueJacket = {
@@ -269,7 +314,12 @@ let jacket = blueJacket;
 jacket.favorite = true;
 
 // 1. Log `blueJacket` and `jacket` variables
+
+console.log(blueJacket);
+console.log(jacket);
 // 2. What do you notice?
+
+// They are same
 
 blueJacket = {
   'link': 'https://coteleparis.com/collections/tous-les-produits-cotele/products/la-veste-bleu-roi',
@@ -279,6 +329,8 @@ blueJacket = {
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 
+jacket.favorite=true;
+console.log(jacket.favorite,blueJacket)
 
 
 
@@ -292,3 +344,5 @@ blueJacket = {
 // 🎯 TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
+localStorage.favorite = MY_FAVORITE_BRANDS;
+console.log(localStorage);
