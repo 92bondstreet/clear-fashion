@@ -70,7 +70,7 @@ With [javascript-empire](https://github.com/92bondstreet/javascript-empire/tree/
 | Step | Workshops | Planned Date
 | --- | --- | ---
 | 1 | [Manipulate data with JavaScript in the browser](./workshops/1-manipulate-javascript.md) | 18th January 2021
-| 2 | Interact data with JavaScript, HTML and CSS in the browser again | 25th and 26th January 2021
+| 2 | [Interact data with JavaScript, HTML and CSS in the browser again](./workshops/2-interact-js-css.md) | 25th and 26th January 2021
 | 3 | Scrape data with Node.js | 1st and 8th February 2021
 | 4 | Render data with React | 2 weeks off between 8th Feb. and 1st Mar.
 | 5 | Save data in a Database with MongoDB | 1st March 2021
