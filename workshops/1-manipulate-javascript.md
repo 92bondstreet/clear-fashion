@@ -38,7 +38,7 @@ If not, you should create a [GitHub account](https://github.com/join) then [add 
 ❯ git clone git@github.com:YOUR_USERNAME/clear-fashion.git
 ```
 
-4. **Open the entry point [./client/index.html](./client/index.html)** in your browser (that loads the `index.js` file)
+4. **Open the entry point [../client/index.html](../client/index.html)** in your browser (that loads the `index.js` file)
 
 ```sh
 # macos cli
@@ -55,7 +55,7 @@ If not, you should create a [GitHub account](https://github.com/join) then [add 
 
 ## 👩‍💻 Just tell me what to do
 
-1. **Solve each `TODO`** inside [./client/index.js](./client/index.js) file with JavaScript
+1. **Solve each `TODO`** inside [../client/index.js](../client/index.js) file with JavaScript
 
 ![todo](./img/1-todo.png)
 
