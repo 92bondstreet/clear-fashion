@@ -18,44 +18,22 @@ console.table(MY_FAVORITE_BRANDS);
 console.log(MY_FAVORITE_BRANDS[0]);
 
 
-
-
-
-/**
- * 🌱
- * Let's go with a very very simple first todo
- * Keep pushing
- * 🌱
- */
-
 // 🎯 TODO: The cheapest t-shirt
-// 0. I have 3 favorite brands stored in MY_FAVORITE_BRANDS variable
-// 1. Create a new variable and assign it the link of the cheapest t-shirt
-// I can find on these e-shops
-// 2. Log the variable
 
-
-
-
-
-/**
- * 👕
- * Easy 😁?
- * Now we manipulate the variable `marketplace`
- * `marketplace` is a list of products from several brands e-shops
- * The variable is loaded by the file data.js
- * 👕
- */
+var cheapest_tshirt ="https://www.loom.fr/products/le-t-shirt";
+console.log(cheapest_tshirt);
 
 // 🎯 TODO: Number of products
-// 1. Create a variable and assign it the number of products
-// 2. Log the variable
 
+var number_product = marketplace.length
+console.log("Number of products : " + number_product)
 
 // 🎯 TODO: Brands name
-// 1. Create a variable and assign it the list of brands name only
-// 2. Log the variable
-// 3. Log how many brands we have
+
+var brands_name = [];
+marketplace.forEach(element => brands_name.push(element.brand))
+console.log("Brands names : " + brands_name)
+console.log("Number of brands : " + brands_name.length)
 
 
 // 🎯 TODO: Sort by price
