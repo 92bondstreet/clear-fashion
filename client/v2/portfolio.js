@@ -28,11 +28,17 @@ const setCurrentProducts = ({result, meta}) => {
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async (page = 1, size = 12) => {
+const fetchProducts = async (page = 1, size = 12, brand = null) => {
   try {
-    const response = await fetch(
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+    let response = await fetch(
+      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`);
+    if(brand != null ){
+      response = await fetch(
+      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
     );
+    }
+    
+    
     const body = await response.json();
 
     if (body.success !== true) {
@@ -103,17 +109,19 @@ const renderIndicators = pagination => {
  * Render brands selector
  * @param  {Object} products
  */
-const renderBrands = products => {
+const renderBrands = async () => {
 
   //take the list of all brands
-  const listBrand = Array.from(new Set(products.map(product => {return product.brand;})))
+
+  const products = await fetchProducts(1, 150);
+  const listBrand = Array.from(new Set(products.result.map(product => {return product.brand;})))
 
   let options = "";
   for(let i= 0; i<listBrand.length; i++){
     options += `<option value="${listBrand[i]}">${listBrand[i]}</option>`
   }
-  console.log(options)
   selectBrands.innerHTML = options;
+  selectBrands.selectedIndex = selectBrands.value;
 
 };
 
@@ -122,7 +130,7 @@ const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
-  renderBrands(products);
+  renderBrands();
 };
 
 /**
@@ -135,12 +143,31 @@ const render = (products, pagination) => {
 selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
+
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
 
 selectPage.addEventListener('change', async (event) => {
   const products = await fetchProducts(parseInt(event.target.value), selectShow.value);
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+
+selectBrands.addEventListener('change', async (event) => {
+
+  const brand = event.target.value
+
+  const products = await fetchProducts(selectPage.Show, selectShow.value, brand);
+
+  /*
+  const new_products = products.result.filter(function(value, index, arr){ 
+        return value.brand == brand;
+    });
+  products.result = new_products;
+  */
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
