@@ -1,6 +1,6 @@
 // Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
-
+  
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
@@ -10,6 +10,7 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const selectBrands = document.querySelector('#brand-select');
 
 /**
  * Set global value
@@ -75,6 +76,7 @@ const renderProducts = products => {
  * Render page selector
  * @param  {Object} pagination
  */
+
 const renderPagination = pagination => {
   const {currentPage, pageCount} = pagination;
   const options = Array.from(
@@ -86,6 +88,7 @@ const renderPagination = pagination => {
   selectPage.selectedIndex = currentPage - 1;
 };
 
+
 /**
  * Render page selector
  * @param  {Object} pagination
@@ -96,10 +99,30 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 
+/**
+ * Render brands selector
+ * @param  {Object} products
+ */
+const renderBrands = products => {
+
+  //take the list of all brands
+  const listBrand = Array.from(new Set(products.map(product => {return product.brand;})))
+
+  let options = "";
+  for(let i= 0; i<listBrand.length; i++){
+    options += `<option value="${listBrand[i]}">${listBrand[i]}</option>`
+  }
+  console.log(options)
+  selectBrands.innerHTML = options;
+
+};
+
+
 const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
+  renderBrands(products);
 };
 
 /**
@@ -111,6 +134,13 @@ const render = (products, pagination) => {
  */
 selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+selectPage.addEventListener('change', async (event) => {
+  const products = await fetchProducts(parseInt(event.target.value), selectShow.value);
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
