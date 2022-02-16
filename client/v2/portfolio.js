@@ -1,6 +1,6 @@
 // Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
-  
+   
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
@@ -13,6 +13,7 @@ const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrands = document.querySelector('#brand-select');
 const selectFilter = document.querySelector('#filter-select');
+const selectSort = document.querySelector('#sort-select');
 
 /**
  * Set global value
@@ -118,7 +119,7 @@ const renderBrands = async () => {
   const products = await fetchProducts(1, 150);
   const listBrand = Array.from(new Set(products.result.map(product => {return product.brand;})))
 
-  let options = `<option value=${undefined}>undefined</option>`;
+  let options = `<option value=${undefined}></option>`;
   for(let i= 0; i<listBrand.length; i++){
     options += `<option value="${listBrand[i]}">${listBrand[i]}</option>`
   }
@@ -172,6 +173,7 @@ selectBrands.addEventListener('change', async (event) => {
   const products = await fetchProducts(selectPage.Show, selectShow.value, brand);
 
   selectFilter.selectedIndex = 0;
+  selectSort.selectedIndex = 0;
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
@@ -201,6 +203,44 @@ selectBrands.addEventListener('change', async (event) => {
   render(currentProducts, currentPagination);
   
 });
+
+/**
+ * Select the type of sort 
+ */
+selectSort.addEventListener('change', async (event) => {
+
+  const sort = event.target.value
+  let products = await fetchProducts(1, 150,currentBrand);
+
+  if(sort == "price-asc"){
+    products.result.sort(function (a,b){
+      return a.price - b.price;
+    });
+  }
+  else if(sort == "price-desc"){
+    products.result.sort(function (a,b){
+      return b.price - a.price;
+    });
+  }
+  else if(sort == "date-asc"){
+    products.result.sort(function (a,b){
+      return new Date(a.released) - new Date(b.released)
+    });
+  }
+  else if(sort == "date-desc"){
+    products.result.sort(function (a,b){
+      return new Date(b.released) - new Date(a.released)
+    });
+  }
+  else{
+    products = await fetchProducts(selectPage.Show, selectShow.value, currentBrand);
+  }
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+  
+});
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
