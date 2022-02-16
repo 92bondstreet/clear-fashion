@@ -22,7 +22,7 @@ const selectFilter = document.querySelector('#filter-select');
 const setCurrentProducts = ({result, meta}) => {
   currentProducts = result;
   currentPagination = meta;
-  currentBrand = selectBrands.value
+  currentBrand = selectBrands.value;
 };
 
 /**
@@ -170,6 +170,8 @@ selectBrands.addEventListener('change', async (event) => {
   const brand = event.target.value
 
   const products = await fetchProducts(selectPage.Show, selectShow.value, brand);
+
+  selectFilter.selectedIndex = 0;
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
