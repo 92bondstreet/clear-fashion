@@ -12,6 +12,7 @@ const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrands = document.querySelector('#brand-select');
+const selectFilter = document.querySelector('#filter-select');
 
 /**
  * Set global value
@@ -138,6 +139,7 @@ const render = (products, pagination) => {
  * Declaration of all Listeners
  */
 
+
 /**
  * Select the number of products to display
  */
@@ -149,6 +151,9 @@ selectShow.addEventListener('change', async (event) => {
   render(currentProducts, currentPagination);
 });
 
+/**
+ * Select the page to display
+ */
 selectPage.addEventListener('change', async (event) => {
   const products = await fetchProducts(parseInt(event.target.value), selectShow.value, currentBrand);
 
@@ -157,15 +162,42 @@ selectPage.addEventListener('change', async (event) => {
 });
 
 
+/**
+ * Select the brands to display
+ */
 selectBrands.addEventListener('change', async (event) => {
 
   const brand = event.target.value
-  console.log(brand)
 
   const products = await fetchProducts(selectPage.Show, selectShow.value, brand);
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
+});
+
+/**
+ * Select the type of filter 
+ */
+ selectFilter.addEventListener('change', async (event) => {
+
+  const filter = event.target.value
+  let products = await fetchProducts(1, 150,currentBrand);
+
+  if(filter == "price-reasonable"){
+    let new_products = products.result.filter(x => x.price <= 50)
+    products.result = new_products;
+  }
+  else if(filter == "released-recently"){
+    let new_products = products.result.filter(x => {new Date(x.released) >= new Date(Date.now() - 12096e5)})
+    products.result = new_products;
+  }
+  else{
+    products = await fetchProducts(selectPage.Show, selectShow.value, currentBrand);
+  }
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+  
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
